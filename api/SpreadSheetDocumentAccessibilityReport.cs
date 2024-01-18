@@ -12,13 +12,13 @@ using AccessibilityReportForDocuments.core.errors;
 using AccessibilityReportForDocuments.core.reports;
 
 
-namespace AccessibilityReportForDocuments
+namespace AccessibilityReportForDocuments.api
 {
 
-    public static class WordDocumentAccessibilityReport
+    public static class SpreadSheetDocumentAccessibilityReport
     {
 
-        [FunctionName("WordDocumentAccessibilityReport")]
+        [FunctionName("SpreadSheetDocumentAccessibilityReport")]
         public static async Task<IActionResult> Run([HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = null)] HttpRequest req, ILogger log)
         {
             log.LogInformation("C# HTTP trigger function processed a request.");
@@ -31,10 +31,10 @@ namespace AccessibilityReportForDocuments
             byte[] documentContentBytes = Convert.FromBase64String(documentContent);
             Stream stream = new MemoryStream(documentContentBytes);
 
-            log.LogInformation("Generating report for Word Document.");
-            WordDocumentReport report = new(log);
+            log.LogInformation("Generating report for SpreadSheet Document.");
+            SpreadSheetDocumentReport report = new(log);
             List<AccessibilityError> result = report.GenerateReport(stream);
-            log.LogInformation($"Report for Word Document generated: {result.Count} accessibility errors found.");
+            log.LogInformation($"Report for SpreadSheet document generated: {result.Count} accessibility errors found.");
 
             string responseMessage = JsonConvert.SerializeObject(result);
             return new OkObjectResult(responseMessage);
