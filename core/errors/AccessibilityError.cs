@@ -8,12 +8,12 @@
 
     }
 
-    internal class ImageAltTextNotFoundError : AccessibilityError
+    internal class ObjectAltTextNotFoundError : AccessibilityError
     {
         private readonly string ERROR_DESCRIPTION = "Missing Object Description";
-        private readonly string ERROR_TYPE = "Image Alt Text Not Found";
+        private readonly string ERROR_TYPE = "Object Alt Text Not Found";
 
-        public ImageAltTextNotFoundError(string objectName)
+        public ObjectAltTextNotFoundError(string objectName)
         {
             ObjectName = objectName;
             ErrorType = ERROR_TYPE;

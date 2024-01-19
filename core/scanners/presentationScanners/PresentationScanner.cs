@@ -24,8 +24,6 @@ namespace AccessibilityReportForDocuments.core.scanners.presentationScanners
             {
                 Slide slide = (doc.PresentationPart.GetPartById(slideId.RelationshipId) as SlidePart).Slide;
 
-                // OR: https://stackoverflow.com/questions/32009006/openxml-get-image-alt-text-title
-
                 foreach (var image in slide.Descendants<Picture>())
                 {
                     var name = image.NonVisualPictureProperties.NonVisualDrawingProperties.Name;
@@ -33,7 +31,7 @@ namespace AccessibilityReportForDocuments.core.scanners.presentationScanners
 
                     if (altText == null)
                     {
-                        imageAltTextNotFoundErrors.Add(new ImageAltTextNotFoundError(name));
+                        imageAltTextNotFoundErrors.Add(new ObjectAltTextNotFoundError(name));
                     }
                 }
             }

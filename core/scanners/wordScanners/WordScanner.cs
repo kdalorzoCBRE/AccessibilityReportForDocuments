@@ -1,9 +1,12 @@
 ﻿using AccessibilityReportForDocuments.core.errors;
+using DocumentFormat.OpenXml.Drawing.Wordprocessing;
 using DocumentFormat.OpenXml.Packaging;
 using DocumentFormat.OpenXml.Wordprocessing;
 using System.Collections.Generic;
 using System.Linq;
-using Picture = DocumentFormat.OpenXml.Drawing.Pictures.Picture;
+using Anchor = DocumentFormat.OpenXml.Drawing.Wordprocessing.Anchor;
+using Paragraph = DocumentFormat.OpenXml.Wordprocessing.Paragraph;
+using Run = DocumentFormat.OpenXml.Wordprocessing.Run;
 
 namespace AccessibilityReportForDocuments.core.scanners.wordScanners
 {
@@ -13,31 +16,68 @@ namespace AccessibilityReportForDocuments.core.scanners.wordScanners
         public List<AccessibilityError> Scan(OpenXmlPackage document, Body data);
     }
 
-    internal class WordImageAltTextScanner : IAccessibilityWordScanner<Body>
+    /// <summary>
+    /// Checks for Alt Text for objects of type Picture, Grahic, Diagram, Chart and Screenshoot
+    /// </summary>
+    internal class WordInlineAltTextScanner : IAccessibilityWordScanner<Body>
     {
         public List<AccessibilityError> Scan(OpenXmlPackage document, Body data)
         {
-            List<AccessibilityError> imageAltTextNotFoundErrors = new();
+            List<AccessibilityError> inlineAltTextNotFoundErrors = new();
 
-            foreach (var x in data.Descendants<Paragraph>())
+            foreach (Paragraph paragraph in data.Descendants<Paragraph>())
             {
-                foreach (Run run in x.Descendants<Run>())
+                foreach (Run run in paragraph.Descendants<Run>())
                 {
-                    Picture image = run.Descendants<Picture>().FirstOrDefault();
+                    Inline inline = run.Descendants<Inline>().FirstOrDefault();
 
-                    if (image != null)
+                    if (inline != null)
                     {
-                        var name = image.NonVisualPictureProperties.NonVisualDrawingProperties.Name;
-                        var altText = image.NonVisualPictureProperties.NonVisualDrawingProperties.Description;
+                        string altText = inline.DocProperties.Description;
+                        string name = inline.DocProperties.Name;
 
                         if (altText == null)
                         {
-                            imageAltTextNotFoundErrors.Add(new ImageAltTextNotFoundError(name));
+                            inlineAltTextNotFoundErrors.Add(new ObjectAltTextNotFoundError(name));
                         }
                     }
                 }
             }
-            return imageAltTextNotFoundErrors;
+            return inlineAltTextNotFoundErrors;
+        }
+    }
+
+    /// <summary>
+    /// Checks for Alt Text for objects of type Icon and 3D Model
+    /// </summary>
+    internal class WordAnchorAltTextScanner : IAccessibilityWordScanner<Body>
+    {
+        public List<AccessibilityError> Scan(OpenXmlPackage document, Body data)
+        {
+            List<AccessibilityError> anchorAltTextNotFoundErrors = new();
+
+            foreach (Paragraph paragraph in data.Descendants<Paragraph>())
+            {
+                foreach (Run run in paragraph.Descendants<Run>())
+                {
+                    Anchor anchor = run.Descendants<Anchor>().FirstOrDefault();
+
+                    if (anchor != null)
+                    {
+                        var docProperties = anchor.GetFirstChild<DocProperties>();
+
+                        string altText = docProperties.Description;
+                        string name = docProperties.Name;
+
+                        if (altText == null)
+                        {
+                            anchorAltTextNotFoundErrors.Add(new ObjectAltTextNotFoundError(name));
+                        }
+
+                    }
+                }
+            }
+            return anchorAltTextNotFoundErrors;
         }
     }
 }

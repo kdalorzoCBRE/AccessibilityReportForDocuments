@@ -34,8 +34,6 @@ namespace AccessibilityReportForDocuments.core.reports
             foreach (IAccessibilityScanner<Workbook> scanner in scanners)
             {
                 List<AccessibilityError> scannerErrors = scanner.Scan(spreadSheetDocument, workbook);
-                scannerErrors.ForEach(i => log.LogInformation("Accessibility Error Found", i.ToString()));
-
                 accessibilityErrors.AddRange(scannerErrors);
             }
 

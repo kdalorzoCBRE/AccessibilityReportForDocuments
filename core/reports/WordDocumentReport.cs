@@ -15,7 +15,8 @@ namespace AccessibilityReportForDocuments.core.reports
 
         private readonly List<IAccessibilityWordScanner<Body>> scanners = new()
         {
-            new WordImageAltTextScanner()
+            new WordInlineAltTextScanner(),
+            new WordAnchorAltTextScanner()
         };
 
         public WordDocumentReport(ILogger log)
@@ -34,8 +35,6 @@ namespace AccessibilityReportForDocuments.core.reports
             foreach (IAccessibilityScanner<Body> scanner in scanners)
             {
                 List<AccessibilityError> scannerErrors = scanner.Scan(wordDocument, body);
-                scannerErrors.ForEach(i => log.LogInformation("Accessibility Error Found", i.ToString()));
-
                 accessibilityErrors.AddRange(scannerErrors);
             }
 
