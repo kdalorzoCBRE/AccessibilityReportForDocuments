@@ -6,6 +6,7 @@ using DocumentFormat.OpenXml.Spreadsheet;
 using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 
 namespace AccessibilityReportForDocuments.core.reports
 {
@@ -37,7 +38,7 @@ namespace AccessibilityReportForDocuments.core.reports
                 accessibilityErrors.AddRange(scannerErrors);
             }
 
-            return accessibilityErrors;
+            return accessibilityErrors.GroupBy(x => x.ObjectName).Select(x => x.First()).ToList();
         }
     }
 }

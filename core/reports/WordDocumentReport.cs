@@ -6,6 +6,7 @@ using DocumentFormat.OpenXml.Wordprocessing;
 using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 
 namespace AccessibilityReportForDocuments.core.reports
 {
@@ -13,15 +14,12 @@ namespace AccessibilityReportForDocuments.core.reports
     {
         private readonly ILogger log;
 
-        private readonly List<IAccessibilityWordScanner<Body>> scanners = new()
-        {
-            new WordInlineAltTextScanner(),
-            new WordAnchorAltTextScanner()
-        };
+        private readonly List<IAccessibilityWordScanner<Body>> scanners = new();
 
         public WordDocumentReport(ILogger log)
         {
             this.log = log;
+            scanners.AddRange(WordObjectAltTextScanner.AltTextScanners(this.log));
         }
 
         public List<AccessibilityError> GenerateReport(Stream stream)
@@ -38,7 +36,7 @@ namespace AccessibilityReportForDocuments.core.reports
                 accessibilityErrors.AddRange(scannerErrors);
             }
 
-            return accessibilityErrors;
+            return accessibilityErrors.GroupBy(x => x.ObjectName).Select(x => x.First()).ToList();
         }
     }
 }

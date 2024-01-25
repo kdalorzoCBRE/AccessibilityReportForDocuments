@@ -1,4 +1,7 @@
-﻿namespace AccessibilityReportForDocuments.core.errors
+﻿using System.Linq;
+
+
+namespace AccessibilityReportForDocuments.core.errors
 {
     internal class AccessibilityError
     {
