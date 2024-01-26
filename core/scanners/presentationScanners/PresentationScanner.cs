@@ -6,7 +6,7 @@ using System.Collections.Generic;
 namespace AccessibilityReportForDocuments.core.scanners.presentationScanners
 {
 
-    internal interface IAccessibilityPresentationScanner<T> : IAccessibilityScanner<T> where T : Presentation
+    public interface IAccessibilityPresentationScanner<T> : IAccessibilityScanner<T> where T : Presentation
     {
         public List<AccessibilityError> Scan(OpenXmlPackage document, Presentation data);
     }

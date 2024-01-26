@@ -7,7 +7,7 @@ using System.Linq;
 
 namespace AccessibilityReportForDocuments.core.scanners.presentationScanners
 {
-    internal static class PresentationObjectAltTextScanner
+    public static class PresentationObjectAltTextScanner
     {
         public static List<IAccessibilityPresentationScanner<Presentation>> AltTextScanners(ILogger log)
         {
@@ -22,7 +22,7 @@ namespace AccessibilityReportForDocuments.core.scanners.presentationScanners
     /// <summary>
     /// Checks Alt Text exists for objects of type Picture, Screenshot, Icon and 3D Models
     /// </summary>
-    internal class PresentationImageAltTextScanner : IAccessibilityPresentationScanner<Presentation>
+    public class PresentationImageAltTextScanner : IAccessibilityPresentationScanner<Presentation>
     {
         private readonly ILogger log;
 
@@ -60,7 +60,7 @@ namespace AccessibilityReportForDocuments.core.scanners.presentationScanners
     /// <summary>
     /// Checks Alt Text exists for objects of type Figure 
     /// </summary>
-    internal class PresentationShapeAltTextScanner : IAccessibilityPresentationScanner<Presentation>
+    public class PresentationShapeAltTextScanner : IAccessibilityPresentationScanner<Presentation>
     {
         private readonly ILogger log;
 
@@ -101,7 +101,7 @@ namespace AccessibilityReportForDocuments.core.scanners.presentationScanners
     /// <summary>
     /// Checks Alt Text exists for objects of type 3D Model, SmartArt and Chart
     /// </summary>
-    internal class PresentationGraphicAltTextScanner : IAccessibilityPresentationScanner<Presentation>
+    public class PresentationGraphicAltTextScanner : IAccessibilityPresentationScanner<Presentation>
     {
         private readonly ILogger log;
 

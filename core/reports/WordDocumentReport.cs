@@ -28,6 +28,7 @@ namespace AccessibilityReportForDocuments.core.reports
 
             using WordprocessingDocument wordDocument = WordprocessingDocument.Open(stream, false);
 
+            // TODO: validate for null
             Body body = wordDocument.MainDocumentPart.Document.Body;
 
             foreach (IAccessibilityScanner<Body> scanner in scanners)

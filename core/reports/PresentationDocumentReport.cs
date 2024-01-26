@@ -30,6 +30,7 @@ namespace AccessibilityReportForDocuments.core.reports
 
             using PresentationDocument presentationDocument = PresentationDocument.Open(stream, false);
 
+            // TODO: validate for null
             Presentation presentation = presentationDocument.PresentationPart.Presentation;
 
             foreach (IAccessibilityScanner<Presentation> scanner in scanners)

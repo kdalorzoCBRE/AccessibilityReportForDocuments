@@ -30,6 +30,7 @@ namespace AccessibilityReportForDocuments.core.reports
 
             using SpreadsheetDocument spreadSheetDocument = SpreadsheetDocument.Open(stream, false);
 
+            // TODO: validate for null
             Workbook workbook = spreadSheetDocument.WorkbookPart.Workbook;
 
             foreach (IAccessibilityScanner<Workbook> scanner in scanners)

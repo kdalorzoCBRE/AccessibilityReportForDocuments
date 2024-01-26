@@ -3,7 +3,7 @@
 
 namespace AccessibilityReportForDocuments.core.errors
 {
-    internal class AccessibilityError
+    public class AccessibilityError
     {
         public string ObjectName { get; set; }
         public string ErrorType { get; set; }
@@ -11,7 +11,7 @@ namespace AccessibilityReportForDocuments.core.errors
 
     }
 
-    internal class ObjectAltTextNotFoundError : AccessibilityError
+    public class ObjectAltTextNotFoundError : AccessibilityError
     {
         private readonly string ERROR_DESCRIPTION = "Missing Object Description";
         private readonly string ERROR_TYPE = "Object Alt Text Not Found";

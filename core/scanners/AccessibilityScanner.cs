@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace AccessibilityReportForDocuments.core.scanners
 {
-    internal interface IAccessibilityScanner<T>
+    public interface IAccessibilityScanner<T>
     {
         public List<AccessibilityError> Scan(OpenXmlPackage document, T data);
     }

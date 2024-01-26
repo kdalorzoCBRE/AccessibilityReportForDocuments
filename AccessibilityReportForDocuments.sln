@@ -5,6 +5,8 @@ VisualStudioVersion = 17.8.34408.163
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AccessibilityReportForDocuments", "AccessibilityReportForDocuments.csproj", "{B7D0B5DD-B795-4586-A1B8-4C2858F0A76B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AccessibilityReportForDocumentsTests", "..\AccessibilityReportForDocumentsTests\AccessibilityReportForDocumentsTests.csproj", "{6B72B4DA-10FC-44F1-8000-79F5BA6AA08A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{B7D0B5DD-B795-4586-A1B8-4C2858F0A76B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B7D0B5DD-B795-4586-A1B8-4C2858F0A76B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B7D0B5DD-B795-4586-A1B8-4C2858F0A76B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6B72B4DA-10FC-44F1-8000-79F5BA6AA08A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6B72B4DA-10FC-44F1-8000-79F5BA6AA08A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6B72B4DA-10FC-44F1-8000-79F5BA6AA08A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6B72B4DA-10FC-44F1-8000-79F5BA6AA08A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
