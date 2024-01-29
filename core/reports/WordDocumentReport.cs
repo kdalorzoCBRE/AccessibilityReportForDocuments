@@ -14,7 +14,7 @@ namespace AccessibilityReportForDocuments.core.reports
     {
         private readonly ILogger log;
 
-        private readonly List<IAccessibilityWordScanner<Body>> scanners = new();
+        private readonly List<AccessibilityScanner<Body>> scanners = new();
 
         public WordDocumentReport(ILogger log)
         {

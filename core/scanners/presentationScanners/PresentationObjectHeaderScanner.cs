@@ -1,5 +1,4 @@
 ﻿using AccessibilityReportForDocuments.core.errors;
-using AccessibilityReportForDocuments.core.scanners.presentationScanners;
 using DocumentFormat.OpenXml.Drawing;
 using DocumentFormat.OpenXml.Packaging;
 using DocumentFormat.OpenXml.Presentation;
@@ -13,11 +12,11 @@ namespace AccessibilityReportForDocuments.core.scanners.wordScanners
 
     public static class PresentationObjectHeaderScanner
     {
-        public static List<IAccessibilityPresentationScanner<Presentation>> HeaderScanners(ILogger log)
+        public static List<AccessibilityScanner<Presentation>> HeaderScanners(ILogger log)
         {
             return new()
             {
-                new PresentationTableHeaderScanner(log)
+                new TableHeaderScanner(log)
             };
         }
     }
@@ -25,16 +24,13 @@ namespace AccessibilityReportForDocuments.core.scanners.wordScanners
     /// <summary>
     /// Checks header row exists for tables in the presentation. 
     /// </summary>
-    public class PresentationTableHeaderScanner : IAccessibilityPresentationScanner<Presentation>
+    public class TableHeaderScanner : AccessibilityScanner<Presentation>
     {
-        private readonly ILogger log;
-
-        public PresentationTableHeaderScanner(ILogger log)
+        public TableHeaderScanner(ILogger log) : base(log)
         {
-            this.log = log;
         }
 
-        public List<AccessibilityError> Scan(OpenXmlPackage document, Presentation data)
+        public override List<AccessibilityError> Scan(OpenXmlPackage document, Presentation data)
         {
             List<AccessibilityError> tableHeaderNotFoundErrors = new();
 
@@ -64,10 +60,7 @@ namespace AccessibilityReportForDocuments.core.scanners.wordScanners
                         }
                     }
                 }
-
             }
-
-
             return tableHeaderNotFoundErrors;
         }
     }

@@ -9,29 +9,26 @@ namespace AccessibilityReportForDocuments.core.scanners.presentationScanners
 {
     public static class PresentationObjectAltTextScanner
     {
-        public static List<IAccessibilityPresentationScanner<Presentation>> AltTextScanners(ILogger log)
+        public static List<AccessibilityScanner<Presentation>> AltTextScanners(ILogger log)
         {
             return new()
             {
-                new PresentationImageAltTextScanner(log),
-                new PresentationShapeAltTextScanner(log),
-                new PresentationGraphicAltTextScanner(log)
+                new ImageAltTextScanner(log),
+                new ShapeAltTextScanner(log),
+                new GraphicAltTextScanner(log)
             };
         }
     }
     /// <summary>
     /// Checks Alt Text exists for objects of type Picture, Screenshot, Icon and 3D Models
     /// </summary>
-    public class PresentationImageAltTextScanner : IAccessibilityPresentationScanner<Presentation>
+    public class ImageAltTextScanner : AccessibilityScanner<Presentation>
     {
-        private readonly ILogger log;
-
-        public PresentationImageAltTextScanner(ILogger log)
+        public ImageAltTextScanner(ILogger log) : base(log)
         {
-            this.log = log;
         }
-    
-        public List<AccessibilityError> Scan(OpenXmlPackage document, Presentation data)
+
+        public override List<AccessibilityError> Scan(OpenXmlPackage document, Presentation data)
         {
             PresentationDocument doc = document as PresentationDocument;
 
@@ -60,16 +57,13 @@ namespace AccessibilityReportForDocuments.core.scanners.presentationScanners
     /// <summary>
     /// Checks Alt Text exists for objects of type Figure 
     /// </summary>
-    public class PresentationShapeAltTextScanner : IAccessibilityPresentationScanner<Presentation>
+    public class ShapeAltTextScanner : AccessibilityScanner<Presentation>
     {
-        private readonly ILogger log;
-
-        public PresentationShapeAltTextScanner(ILogger log)
+        public ShapeAltTextScanner(ILogger log) : base(log)
         {
-            this.log = log;
         }
 
-        public List<AccessibilityError> Scan(OpenXmlPackage document, Presentation data)
+        public override List<AccessibilityError> Scan(OpenXmlPackage document, Presentation data)
         {
             PresentationDocument doc = document as PresentationDocument;
 
@@ -101,15 +95,13 @@ namespace AccessibilityReportForDocuments.core.scanners.presentationScanners
     /// <summary>
     /// Checks Alt Text exists for objects of type 3D Model, SmartArt and Chart
     /// </summary>
-    public class PresentationGraphicAltTextScanner : IAccessibilityPresentationScanner<Presentation>
+    public class GraphicAltTextScanner : AccessibilityScanner<Presentation>
     {
-        private readonly ILogger log;
-
-        public PresentationGraphicAltTextScanner(ILogger log)
+        public GraphicAltTextScanner(ILogger log) : base(log)
         {
-            this.log = log;
         }
-        public List<AccessibilityError> Scan(OpenXmlPackage document, Presentation data)
+
+        public override List<AccessibilityError> Scan(OpenXmlPackage document, Presentation data)
         {
             PresentationDocument doc = document as PresentationDocument;
 

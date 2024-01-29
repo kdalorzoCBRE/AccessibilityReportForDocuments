@@ -16,7 +16,7 @@ namespace AccessibilityReportForDocuments.core.reports
     {
         private readonly ILogger log;
 
-        private readonly List<IAccessibilityPresentationScanner<Presentation>> scanners = new();
+        private readonly List<AccessibilityScanner<Presentation>> scanners = new();
  
 
         public PresentationDocumentReport(ILogger log)

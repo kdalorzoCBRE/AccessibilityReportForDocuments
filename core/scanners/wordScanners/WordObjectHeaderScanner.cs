@@ -10,7 +10,7 @@ namespace AccessibilityReportForDocuments.core.scanners.wordScanners
 
     public static class WordObjectHeaderScanner
     {
-        public static List<IAccessibilityWordScanner<Body>> HeaderScanners(ILogger log)
+        public static List<AccessibilityScanner<Body>> HeaderScanners(ILogger log)
         {
             return new()
             {
@@ -22,16 +22,13 @@ namespace AccessibilityReportForDocuments.core.scanners.wordScanners
     /// <summary>
     /// Checks header row eists for tables in the document. 
     /// </summary>
-    public class WordTableHeaderScanner : IAccessibilityWordScanner<Body>
+    public class WordTableHeaderScanner : AccessibilityScanner<Body>
     {
-        private readonly ILogger log;
-
-        public WordTableHeaderScanner(ILogger log)
+        public WordTableHeaderScanner(ILogger log) : base(log)
         {
-            this.log = log;
         }
 
-        public List<AccessibilityError> Scan(OpenXmlPackage document, Body data)
+        public override List<AccessibilityError> Scan(OpenXmlPackage document, Body data)
         {
             List<AccessibilityError> tableHeaderNotFoundErrors = new();
 

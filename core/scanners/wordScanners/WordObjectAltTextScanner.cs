@@ -5,20 +5,18 @@ using DocumentFormat.OpenXml.Wordprocessing;
 using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
 using System.Linq;
-using Anchor = DocumentFormat.OpenXml.Drawing.Wordprocessing.Anchor;
-using Paragraph = DocumentFormat.OpenXml.Wordprocessing.Paragraph;
-using Run = DocumentFormat.OpenXml.Wordprocessing.Run;
+
 
 namespace AccessibilityReportForDocuments.core.scanners.wordScanners
 {
 
     internal static class WordObjectAltTextScanner
     {
-        public static List<IAccessibilityWordScanner<Body>> AltTextScanners(ILogger log)
+        public static List<AccessibilityScanner<Body>> AltTextScanners(ILogger log)
         {
             return new()
             {
-                new WordInlineAltTextScanner(log),
+                new InlineAltTextScanner(log),
                 new WordAnchorAltTextScanner(log)
             };
         }
@@ -27,16 +25,13 @@ namespace AccessibilityReportForDocuments.core.scanners.wordScanners
     /// <summary>
     /// Checks Alt Text exists for objects of type Picture, Grahic, Diagram, Chart, Screenshoot, Icon and 3D Models that are inline
     /// </summary>
-    internal class WordInlineAltTextScanner : IAccessibilityWordScanner<Body>
+    internal class InlineAltTextScanner : AccessibilityScanner<Body>
     {
-        private readonly ILogger log;
-
-        public WordInlineAltTextScanner(ILogger log)
+        public InlineAltTextScanner(ILogger log) : base(log)
         {
-            this.log = log;
         }
 
-        public List<AccessibilityError> Scan(OpenXmlPackage document, Body data)
+        public override List<AccessibilityError> Scan(OpenXmlPackage document, Body data)
         {
             List<AccessibilityError> inlineAltTextNotFoundErrors = new();
 
@@ -66,16 +61,13 @@ namespace AccessibilityReportForDocuments.core.scanners.wordScanners
     /// <summary>
     /// Checks Alt Text exists for objects of type Picture, Grahic, Diagram, Chart, Screenshoot, Icon and 3D Models that are not inline
     /// </summary>
-    internal class WordAnchorAltTextScanner : IAccessibilityWordScanner<Body>
+    internal class WordAnchorAltTextScanner : AccessibilityScanner<Body>
     {
-        private readonly ILogger log;
-
-        public WordAnchorAltTextScanner(ILogger log)
+        public WordAnchorAltTextScanner(ILogger log) : base(log)
         {
-            this.log = log;
         }
 
-        public List<AccessibilityError> Scan(OpenXmlPackage document, Body data)
+        public override List<AccessibilityError> Scan(OpenXmlPackage document, Body data)
         {
             List<AccessibilityError> anchorAltTextNotFoundErrors = new();
 
