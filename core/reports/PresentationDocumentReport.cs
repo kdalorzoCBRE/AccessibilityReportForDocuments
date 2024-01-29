@@ -1,6 +1,7 @@
 ﻿using AccessibilityReportForDocuments.core.errors;
 using AccessibilityReportForDocuments.core.scanners;
 using AccessibilityReportForDocuments.core.scanners.presentationScanners;
+using AccessibilityReportForDocuments.core.scanners.wordScanners;
 using DocumentFormat.OpenXml.Packaging;
 using DocumentFormat.OpenXml.Presentation;
 using Microsoft.Extensions.Logging;
@@ -22,6 +23,7 @@ namespace AccessibilityReportForDocuments.core.reports
         {
             this.log = log;
             scanners.AddRange(PresentationObjectAltTextScanner.AltTextScanners(this.log));
+            scanners.AddRange(PresentationObjectHeaderScanner.HeaderScanners(this.log));
         }
 
         public List<AccessibilityError> GenerateReport(Stream stream)

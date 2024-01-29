@@ -23,4 +23,17 @@ namespace AccessibilityReportForDocuments.core.errors
             ErrorDescription = ERROR_DESCRIPTION;
         }
     }
+
+    public class TableHeaderNotFoundError : AccessibilityError
+    {
+        private readonly string ERROR_DESCRIPTION = "Missing Table Header";
+        private readonly string ERROR_TYPE = "Table Header Not Found";
+
+        public TableHeaderNotFoundError(string objectName)
+        {
+            ObjectName = objectName;
+            ErrorType = ERROR_TYPE;
+            ErrorDescription = ERROR_DESCRIPTION;
+        }
+    }
 }

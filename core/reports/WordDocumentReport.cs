@@ -20,6 +20,7 @@ namespace AccessibilityReportForDocuments.core.reports
         {
             this.log = log;
             scanners.AddRange(WordObjectAltTextScanner.AltTextScanners(this.log));
+            scanners.AddRange(WordObjectHeaderScanner.HeaderScanners(this.log));
         }
 
         public List<AccessibilityError> GenerateReport(Stream stream)

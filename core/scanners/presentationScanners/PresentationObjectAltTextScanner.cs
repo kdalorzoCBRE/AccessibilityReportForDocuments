@@ -119,7 +119,7 @@ namespace AccessibilityReportForDocuments.core.scanners.presentationScanners
             {
                 Slide slide = (doc.PresentationPart.GetPartById(slideId.RelationshipId) as SlidePart).Slide;
 
-                foreach (var shape in slide.Descendants<GraphicFrame>())
+                foreach (GraphicFrame shape in slide.Descendants<GraphicFrame>())
                 {
                     var name = shape.NonVisualGraphicFrameProperties.NonVisualDrawingProperties.Name;
                     var altText = shape.NonVisualGraphicFrameProperties.NonVisualDrawingProperties.Description;
