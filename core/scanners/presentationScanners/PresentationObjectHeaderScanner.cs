@@ -12,7 +12,7 @@ namespace AccessibilityReportForDocuments.core.scanners.wordScanners
 
     public static class PresentationObjectHeaderScanner
     {
-        public static List<AccessibilityScanner<Presentation>> HeaderScanners(ILogger log)
+        public static List<AccessibilityScanner<Presentation>> ObjectHeaderScanners(ILogger log)
         {
             return new()
             {
